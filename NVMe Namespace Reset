@@ -1,0 +1,12 @@
+
+# Get total NVM Capacity and Unallocated Capacity
+sudo nvme id-ctrl /dev/nvme0 -H | egrep -i 'tnvmcap|unvmcap|nn|mnan|oacs|fna'
+
+# Create new namespace using the total Unallocated Capacity divided by Sector Size (15.36TB)
+sudo nvme create-ns /dev/nvme0 -s 30005842608 -c 30005842608 -f 0
+
+# Identify the drives controller
+sudo nvme id-ctrl /dev/nvme0 | grep -i cntlid
+
+# Attach new namespace to the drives controller
+sudo nvme attach-ns /dev/nvme0 -n 1 -c 1
