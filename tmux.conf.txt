@@ -1,0 +1,30 @@
+﻿tmux.conf
+
+
+# Use Ctrl+a as the prefix instead of Ctrl+b
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+
+# Easier splits: | for vertical, - for horizontal
+unbind '"'
+unbind %
+bind | split-window -h
+bind - split-window -v
+
+
+# Use Alt+arrow keys to switch panes (no prefix)
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+
+# Enable mouse support (click to switch panes, resize, scroll)
+set -g mouse on
+
+
+# Make status bar a bit clearer
+set -g status-left "#S "
+set -g status-right "%H:%M %d-%b"
